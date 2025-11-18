@@ -10,11 +10,6 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai 
 
-st.set_page_config(page_title="AI Salary Predictor", layout="wide")
-
-# Function to update the sidebar radio selection
-def set_page(page_name):
-    st.session_state['main_nav_radio'] = page_name
 
 @st.cache_resource
 def load_model():
@@ -48,6 +43,13 @@ def load_column_order():
     except:
         st.error("Column order not found. Please run train_model.py first.")
         return []
+
+
+st.set_page_config(page_title="AI Salary Predictor", layout="wide")
+
+# Function to update the sidebar radio selection
+def set_page(page_name):
+    st.session_state['main_nav_radio'] = page_name
 
 # Updated to include 'country'
 def preprocess_input(input_dict, column_order):
