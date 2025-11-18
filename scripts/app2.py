@@ -19,7 +19,7 @@ def set_page(page_name):
 @st.cache_resource
 def load_model():
     try:
-        return joblib.load('models/salary_predictor.pkl')
+        return joblib.load('../models/salary_predictor.pkl')
     except:
         st.error("Model not found. Please run train_model.py first.")
         class MockModel:
@@ -31,7 +31,7 @@ def load_model():
 def load_data():
     try:
         # Load the updated data
-        return pd.read_csv('data/salary_data.csv')
+        return pd.read_csv('../data/salary_data.csv')
     except:
         st.error("Data not found. Please run generate_data.py first.")
         # Mock DataFrame now includes 'country'
@@ -43,7 +43,7 @@ def load_data():
 @st.cache_data
 def load_column_order():
     try:
-        with open('models/column_order.json', 'r') as f:
+        with open('../models/column_order.json', 'r') as f:
             return json.load(f)
     except:
         st.error("Column order not found. Please run train_model.py first.")
