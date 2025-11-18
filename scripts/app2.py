@@ -11,9 +11,6 @@ from dotenv import load_dotenv
 import google.generativeai as genai 
 
 import os
-st.write("Current working directory:", os.getcwd())
-st.write("Files in CWD:", os.listdir())
-st.write("Files in models folder:", os.listdir("models"))
 
 @st.cache_resource
 def load_model():
