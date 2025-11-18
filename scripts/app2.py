@@ -18,36 +18,16 @@ def set_page(page_name):
 
 @st.cache_resource
 def load_model():
-    try:
-        return joblib.load('models/salary_predictor.pkl')
-    except:
-        st.error("Model not found. Please run train_model.py first.")
-        class MockModel:
-            def predict(self, df):
-                return np.array([100000])
-        return MockModel()
+    return joblib.load('models/salary_predictor.pkl')
 
 @st.cache_data
 def load_data():
-    try:
-        # Load the updated data
-        return pd.read_csv('data/salary_data.csv')
-    except:
-        st.error("Data not found. Please run generate_data.py first.")
-        # Mock DataFrame now includes 'country'
-        return pd.DataFrame({
-            'job_title': ['Software Engineer'], 'location': ['Remote'], 'company_size': ['Large (1000+)'],
-            'experience': [5], 'education': ['Bachelor'], 'salary': [100000], 'country': ['USA']
-        })
+    return pd.read_csv('data/salary_data.csv')
 
 @st.cache_data
 def load_column_order():
-    try:
-        with open('models/column_order.json', 'r') as f:
-            return json.load(f)
-    except:
-        st.error("Column order not found. Please run train_model.py first.")
-        return []
+    with open('models/column_order.json', 'r') as f:
+        return json.load(f)
 
 # Updated to include 'country'
 def preprocess_input(input_dict, column_order):
