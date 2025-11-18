@@ -14,20 +14,15 @@ import os
 
 @st.cache_resource
 def load_model():
-    import traceback
     try:
-        st.write("Loading model from: ", os.path.abspath("models/salary_predictor.pkl"))
-        model = joblib.load("models/salary_predictor.pkl")
-        st.success("Model loaded successfully!")
-        return model
-
-    except Exception as e:
-        st.error(f"Error loading model: {e}")
-        st.text(traceback.format_exc())  # shows the real error
+        return joblib.load('models/salary_predictor.pkl')
+    except:
+        st.error("Model not found. Please run train_model.py first.")
         class MockModel:
             def predict(self, df):
                 return np.array([100000])
         return MockModel()
+
 
 
 @st.cache_data
